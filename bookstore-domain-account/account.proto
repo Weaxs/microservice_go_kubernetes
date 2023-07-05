@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package account;
+
+option go_package = "account";
+
+message Account {
+  string username = 1;
+  string password = 2;
+  string name = 3;
+  string avatar = 4;
+  string telephone = 5;
+  string email = 6;
+  string location = 7;
+}
+
+message GetAccountRequest {
+  string username = 1;
+}
+
+message GetAccountResponse {
+  Account account = 1;
+}
+
+message ChangeAccountRequest{
+  Account account = 1;
+}
+
+message ChangeAccountResponse {}
+
+service Api {
+  rpc GetAccount (GetAccountRequest) returns (GetAccountResponse) {}
+  rpc CreateAccount (ChangeAccountRequest) returns (ChangeAccountResponse) {}
+  rpc UpdateAccount (ChangeAccountRequest) returns (ChangeAccountResponse) {}
+}
+

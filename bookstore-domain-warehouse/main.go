@@ -11,7 +11,7 @@ import (
 
 func main() {
 	initLog()
-	addr, err := net.ResolveTCPAddr("tcp", ":8810")
+	addr, err := net.ResolveTCPAddr("tcp", ":8811")
 	if err != nil {
 		panic(any(err))
 	}
@@ -23,9 +23,8 @@ func main() {
 	options = append(options, server.WithMuxTransport())
 
 	svr := server.NewServer(options...)
-
-	if err := svr.RegisterService(api.AccountApiServiceInfo, new(handler)); err != nil {
-		panic(any(err))
+	if err := svr.RegisterService(api.WarehouseApiServiceInfo, new(handler)); err != nil {
+		panic(err)
 	}
 
 	if err := svr.Run(); err != nil {

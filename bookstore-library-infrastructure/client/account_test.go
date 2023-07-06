@@ -8,8 +8,8 @@ import (
 	"testing"
 )
 
-func TestCall(t *testing.T) {
-	client, err := NewClient(
+func TestAccountClient(t *testing.T) {
+	client, err := NewAccountClient(
 		client.WithHostPorts("[::1]:8810"),
 		client.WithMuxConnection(1))
 	if err != nil {

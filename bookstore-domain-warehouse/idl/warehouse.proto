@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package warehouse;
+
+option go_package = "warehouse";
+
+// 待交付商品的状态
+enum DeliveredStatus {
+  DECREASE = 0;
+  INCREASE = 1;
+  FROZEN = 2;
+  THAWED = 3;
+}
+
+// 广告对象模型
+message Advertisement {
+  string image = 1;
+  int64 productId = 2;
+}
+
+// 商品规格
+message Specification {
+  string item = 1;
+  string value = 2;
+  int64 productId = 3;
+}
+
+// 商品对象
+message Product {
+  string title = 1;
+  double price = 2;
+  float rate = 3;
+  string description = 4;
+  string cover = 5;
+  string detail = 6;
+  repeated Specification specifications = 7;
+}
+
+// 商品库存
+message Stockpile {
+  int64 amount = 1;
+  int64 frozen = 2;
+  Product product = 3;
+}
+
+message EmptyResponse {
+}
+
+message GetAllAdvertisementsResponse {
+  repeated Advertisement advertisements = 1;
+}
+
+message GetAllProductResponse {
+  repeated Product products = 1;
+}
+
+message GetProductRequest {
+  int64 id = 1;
+}
+
+message RemoveProductRequest {
+  int64 id = 1;
+}
+
+message GetProductResponse {
+  Product product = 1;
+}
+
+message ChangeProductRequest {
+  Product product = 1;
+}
+
+message UpdateStockpileRequest {
+  int64 productId = 1;
+  int64 amount = 2;
+}
+
+message QueryStockpileRequest {
+  int64 productId = 1;
+}
+
+message QueryStockpileResponse {
+  Stockpile stockpile = 1;
+}
+
+message SetDeliveredStatusRequest {
+  int64 productId = 1;
+  int64 amount = 2;
+  DeliveredStatus status = 3;
+}
+
+service WarehouseApi {
+  // 获取所有的广告信息
+  rpc GetAllAdvertisements (EmptyResponse) returns (GetAllAdvertisementsResponse);
+
+  // 获取仓库中所有的货物信息
+  rpc GetAllProducts (EmptyResponse) returns (GetAllProductResponse);
+  // 获取仓库中指定的货物信息
+  rpc GetProduct (GetProductRequest) returns (GetProductResponse);
+  // 创建新的产品
+  rpc CreateProduct (ChangeProductRequest) returns (EmptyResponse);
+  // 更新产品信息
+  rpc UpdateProduct (ChangeProductRequest) returns (EmptyResponse);
+  // 移出产品信息
+  rpc RemoveProduct (RemoveProductRequest) returns (EmptyResponse);
+
+  // 将指定的产品库存调整为指定数额
+  rpc UpdateStockpile (UpdateStockpileRequest) returns (EmptyResponse);
+  rpc QueryStockpile (QueryStockpileRequest) returns (QueryStockpileResponse);
+  rpc SetDeliveredStatus (SetDeliveredStatusRequest) returns (EmptyResponse);
+}

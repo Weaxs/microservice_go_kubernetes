@@ -8,15 +8,15 @@ import (
 	"github.com/cloudwego/kitex/client/callopt"
 )
 
-// Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
-type Client interface {
+// AccountClient is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
+type AccountClient interface {
 	GetAccount(ctx context.Context, usernmae *domain.GetAccountRequest, callOptions ...callopt.Option) (r *domain.GetAccountResponse, err error)
 	CreateAccount(ctx context.Context, account *domain.ChangeAccountRequest, callOptions ...callopt.Option) (r *domain.ChangeAccountResponse, err error)
 	UpdateAccount(ctx context.Context, account *domain.ChangeAccountRequest, callOptions ...callopt.Option) (r *domain.ChangeAccountResponse, err error)
 }
 
-// NewClient creates a client for the service defined in IDL.
-func NewClient(opts ...client.Option) (Client, error) {
+// NewAccountClient creates a client for the service defined in IDL.
+func NewAccountClient(opts ...client.Option) (AccountClient, error) {
 	var options []client.Option
 	options = append(options, client.WithDestService("AccountApi"))
 
@@ -48,16 +48,6 @@ func (p *kAccountApiClient) CreateAccount(ctx context.Context, account *domain.C
 func (p *kAccountApiClient) UpdateAccount(ctx context.Context, account *domain.ChangeAccountRequest, callOptions ...callopt.Option) (r *domain.ChangeAccountResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateAccount(ctx, account)
-}
-
-type kClient struct {
-	c client.Client
-}
-
-func newServiceClient(c client.Client) *kClient {
-	return &kClient{
-		c: c,
-	}
 }
 
 func (p *kClient) GetAccount(ctx context.Context, usernmae *domain.GetAccountRequest) (r *domain.GetAccountResponse, err error) {

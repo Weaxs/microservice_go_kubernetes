@@ -14,29 +14,38 @@ func getAccount(ctx context.Context, username string) (account *domain.Account, 
 		return nil, errors.New("username is blank")
 	}
 
-	dto, err := getByUsername(username)
+	po, err := getByUsername(username)
 	if err != nil {
 		return nil, err
+	}
+	if po == nil {
+		return nil, errors.New("用户不存在")
 	}
 
 	klog.CtxDebugf(ctx, "get from db")
 	return &domain.Account{
-		Username:  dto.Username,
-		Password:  dto.Password,
-		Name:      dto.Name,
-		Avatar:    dto.Avatar,
-		Telephone: dto.Telephone,
-		Email:     dto.Email,
-		Location:  dto.Location,
+		Username:  po.Username,
+		Password:  po.Password,
+		Name:      po.Name,
+		Avatar:    po.Avatar,
+		Telephone: po.Telephone,
+		Email:     po.Email,
+		Location:  po.Location,
 	}, nil
 }
 
-func createAccount(ctx context.Context, account *domain.Account) error {
+func createAccount(ctx context.Context, account *domain.Account) (err error) {
 	if _, err := govalidator.ValidateStruct(account); err != nil {
 		return err
 	}
 
-	dto := &AccountDto{
+	exist, _ := findByUsernameOrEmailOrTelephone(account.Username, account.Email, account.Telephone)
+	if exist != nil {
+		klog.CtxDebugf(ctx, "用户名称、邮箱、手机号码均不允许与现存用户重复")
+		return errors.New("用户名称、邮箱、手机号码均不允许与现存用户重复")
+	}
+
+	po := &AccountPo{
 		Username:  account.Username,
 		Password:  account.Password,
 		Name:      account.Name,
@@ -46,7 +55,7 @@ func createAccount(ctx context.Context, account *domain.Account) error {
 		Location:  account.Location,
 	}
 	klog.CtxDebugf(ctx, "insert into db")
-	err := insert(dto)
+	err = insert(po)
 	if err != nil {
 		return err
 	}
@@ -54,12 +63,19 @@ func createAccount(ctx context.Context, account *domain.Account) error {
 	return nil
 }
 
-func updateAccount(ctx context.Context, account *domain.Account) error {
+func updateAccount(ctx context.Context, account *domain.Account) (err error) {
 	if _, err := govalidator.ValidateStruct(account); err != nil {
 		return err
 	}
+	origin, err := getByUsername(account.Username)
 
-	dto := &AccountDto{
+	exist, _ := findByUsernameOrEmailOrTelephone(account.Username, account.Email, account.Telephone)
+	if exist != nil && exist.Id != origin.Id {
+		klog.CtxDebugf(ctx, "用户名称、邮箱、手机号码与现存用户产生重复")
+		return errors.New("用户名称、邮箱、手机号码与现存用户产生重复")
+	}
+
+	po := &AccountPo{
 		Username:  account.Username,
 		Password:  account.Password,
 		Name:      account.Name,
@@ -69,7 +85,7 @@ func updateAccount(ctx context.Context, account *domain.Account) error {
 		Location:  account.Location,
 	}
 	klog.CtxDebugf(ctx, "update from db")
-	err := update(dto)
+	err = update(po)
 	if err != nil {
 		return err
 	}

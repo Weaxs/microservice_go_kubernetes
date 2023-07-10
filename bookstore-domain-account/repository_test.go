@@ -7,7 +7,7 @@ import (
 )
 
 func TestRepo(t *testing.T) {
-	dto := &AccountDto{
+	po := &AccountPo{
 		Username:  "zhangsan",
 		Password:  "000000",
 		Name:      "张三",
@@ -16,7 +16,7 @@ func TestRepo(t *testing.T) {
 		Email:     "zhangsan@gmail.com",
 		Location:  "beijing",
 	}
-	testInsert(t, dto)
+	testInsert(t, po)
 
 	ret := testGetByUsername(t, "zhangsan")
 	if ret == nil {
@@ -24,9 +24,9 @@ func TestRepo(t *testing.T) {
 		t.FailNow()
 	}
 
-	dto.Name = "张三03"
-	dto.Password = "111111"
-	testUpdate(t, dto)
+	po.Name = "张三03"
+	po.Password = "111111"
+	testUpdate(t, po)
 	ret = testGetByUsername(t, "zhangsan")
 	if ret == nil {
 		t.Error(errors.New("can not found zhangsan"))
@@ -37,21 +37,21 @@ func TestRepo(t *testing.T) {
 	assert.Equal(t, ret.Name, "张三03")
 }
 
-func testInsert(t *testing.T, dto *AccountDto) {
+func testInsert(t *testing.T, dto *AccountPo) {
 	err := insert(dto)
 	if err != nil {
 		t.Error(err)
 	}
 }
 
-func testUpdate(t *testing.T, dto *AccountDto) {
-	err := update(dto)
+func testUpdate(t *testing.T, po *AccountPo) {
+	err := update(po)
 	if err != nil {
 		t.Error(err)
 	}
 }
 
-func testGetByUsername(t *testing.T, username string) *AccountDto {
+func testGetByUsername(t *testing.T, username string) *AccountPo {
 	ret, err := getByUsername(username)
 	if err != nil {
 		t.Error(err)

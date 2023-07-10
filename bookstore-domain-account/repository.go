@@ -9,7 +9,7 @@ var (
 	db, _ = gorm.Open(mysql.Open("root:12345678@(127.0.0.1:3306)/bookstore"), &gorm.Config{})
 )
 
-type AccountDto struct {
+type AccountPo struct {
 	Id        int    `gorm:"primaryKey;autoIncrement:true" sql:"id"`
 	Username  string `gorm:"index" sql:"username"`
 	Password  string `gorm:"<-:create" sql:"password"`
@@ -20,12 +20,12 @@ type AccountDto struct {
 	Location  string `sql:"location"`
 }
 
-func (AccountDto) TableName() string {
+func (AccountPo) TableName() string {
 	return "account"
 }
 
-func getByUsername(username string) (*AccountDto, error) {
-	account := &AccountDto{}
+func getByUsername(username string) (*AccountPo, error) {
+	account := &AccountPo{}
 	tx := db.First(account, "username = ?", username)
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -34,12 +34,22 @@ func getByUsername(username string) (*AccountDto, error) {
 	}
 }
 
-func insert(account *AccountDto) error {
+func insert(account *AccountPo) error {
 	result := db.Create(&account)
 	return result.Error
 }
 
-func update(account *AccountDto) error {
+func update(account *AccountPo) error {
 	result := db.Model(account).Where("username = ?", account.Username).Updates(&account)
 	return result.Error
+}
+
+func findByUsernameOrEmailOrTelephone(username, email, telephone string) (*AccountPo, error) {
+	account := &AccountPo{}
+	tx := db.Where("username = ? ", username).Or("email = ?", email).
+		Or("telephone = ?", telephone).First(account)
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+	return account, nil
 }

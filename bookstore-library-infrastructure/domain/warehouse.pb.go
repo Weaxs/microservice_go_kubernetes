@@ -267,6 +267,11 @@ func (x *Product) fastReadField7(buf []byte, _type int8) (offset int, err error)
 	return offset, nil
 }
 
+func (x *Product) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *Stockpile) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -771,6 +776,14 @@ func (x *Product) fastWriteField7(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *Product) fastWriteField8(buf []byte) (offset int) {
+	if x.Id == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetId())
+	return offset
+}
+
 func (x *Stockpile) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1131,6 +1144,14 @@ func (x *Product) sizeField7() (n int) {
 	for i := range x.GetSpecifications() {
 		n += fastpb.SizeMessage(7, x.GetSpecifications()[i])
 	}
+	return n
+}
+
+func (x *Product) sizeField8() (n int) {
+	if x.Id == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetId())
 	return n
 }
 
@@ -2543,6 +2564,13 @@ func (x *Product) GetSpecifications() []*Specification {
 		return x.Specifications
 	}
 	return nil
+}
+
+func (x *Product) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 func (x *Stockpile) Reset() {

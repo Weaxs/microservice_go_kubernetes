@@ -62,13 +62,14 @@ type Product struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title          string           `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	Price          float64          `protobuf:"fixed64,2,opt,name=price,proto3" json:"price,omitempty"`
-	Rate           float32          `protobuf:"fixed32,3,opt,name=rate,proto3" json:"rate,omitempty"`
+	Title          string           `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty" valid:"required"`
+	Price          float64          `protobuf:"fixed64,2,opt,name=price,proto3" json:"price,omitempty" valid:"required"`
+	Rate           float32          `protobuf:"fixed32,3,opt,name=rate,proto3" json:"rate,omitempty" valid:"range(0|10)"`
 	Description    string           `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Cover          string           `protobuf:"bytes,5,opt,name=cover,proto3" json:"cover,omitempty"`
 	Detail         string           `protobuf:"bytes,6,opt,name=detail,proto3" json:"detail,omitempty"`
 	Specifications []*Specification `protobuf:"bytes,7,rep,name=specifications,proto3" json:"specifications,omitempty"`
+	Id             int64            `protobuf:"bytes,8,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 // Stockpile 商品库存

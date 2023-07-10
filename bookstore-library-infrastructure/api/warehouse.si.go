@@ -9,9 +9,9 @@ import (
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
 )
 
-var WarehouseApiServiceInfo = newServiceInfo()
+var WarehouseApiServiceInfo = newWarehouseServiceInfo()
 
-func newServiceInfo() *kitex.ServiceInfo {
+func newWarehouseServiceInfo() *kitex.ServiceInfo {
 	serviceName := "WarehouseApi"
 	handlerType := (*WarehouseApi)(nil)
 	methods := map[string]kitex.MethodInfo{

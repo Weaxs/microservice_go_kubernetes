@@ -6,9 +6,9 @@ import (
 	"github.com/cloudwego/kitex/pkg/serviceinfo"
 )
 
-var AccountApiServiceInfo = NewServiceInfo()
+var AccountApiServiceInfo = newAccountApiServiceInfo()
 
-func NewServiceInfo() *serviceinfo.ServiceInfo {
+func newAccountApiServiceInfo() *serviceinfo.ServiceInfo {
 	serviceName := "AccountApi"
 	handlerType := (*AccountApi)(nil)
 	methods := map[string]serviceinfo.MethodInfo{

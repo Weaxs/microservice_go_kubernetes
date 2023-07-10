@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "payment";
+
+import "warehouse.proto";
+import "google/protobuf/timestamp.proto";
+
+
+// 支付状态
+enum PaymentState {
+  WAITING = 0;
+  CANCEL = 1;
+  PAYED = 2;
+  TIMEOUT = 3;
+  NOT_SUPPORT = 4;
+}
+
+message Item {
+  int64 amount = 1;
+  int64 productId = 2;
+}
+
+message Purchase {
+  bool delivery = 1;
+  string name = 2;
+  string telephone = 3;
+  string location = 4;
+}
+
+message Payment {
+  google.protobuf.Timestamp createTime = 1;
+  string payId = 2;
+  double totalPrice = 3;
+  int64 expires = 4;
+  string paymentLink = 5;
+  PaymentState payState = 6;
+}
+
+// 支付结算单
+message Settlement {
+  repeated Item items = 1;
+  Purchase purchase = 2;
+  map<int64, warehouse.Product> productMap = 3;
+}
+
+message ExecuteSettlementRequest {
+  Settlement settlement = 1;
+}
+message ExecuteSettlementResponse {
+  Payment payment = 1;
+}
+
+message UpdatePaymentStateRequest {
+  string payId = 1;
+  PaymentState state = 2;
+}
+
+message UpdatePaymentStateAlias {
+  string payId = 1;
+  int64 accountId = 2;
+  PaymentState state = 3;
+}
+
+service PaymentApi {
+  rpc executeSettlement (ExecuteSettlementRequest) returns (ExecuteSettlementResponse);
+  rpc updatePaymentState (UpdatePaymentStateRequest) returns (warehouse.EmptyResponse);
+  rpc updatePaymentStateAlias (UpdatePaymentStateAlias) returns (warehouse.EmptyResponse);
+}

@@ -9,6 +9,6 @@ import (
 // PaymentApi is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type PaymentApi interface {
 	ExecuteSettlement(ctx context.Context, Req *domain.ExecuteSettlementRequest, callOptions ...callopt.Option) (r *domain.ExecuteSettlementResponse, err error)
-	UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest, callOptions ...callopt.Option) (r *domain.EmptyResponse, err error)
-	UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias, callOptions ...callopt.Option) (r *domain.EmptyResponse, err error)
+	UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest, callOptions ...callopt.Option) (r *domain.Empty, err error)
+	UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias, callOptions ...callopt.Option) (r *domain.Empty, err error)
 }

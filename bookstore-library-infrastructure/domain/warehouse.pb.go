@@ -78,20 +78,20 @@ var (
 )
 var (
 	QueryStockpileResult_Success_DEFAULT       *QueryStockpileResponse
-	GetAllAdvertisementsArgs_Req_DEFAULT       *EmptyResponse
+	GetAllAdvertisementsArgs_Req_DEFAULT       *Empty
 	GetAllAdvertisementsResult_Success_DEFAULT *GetAllAdvertisementsResponse
 	GetProductResult_Success_DEFAULT           *GetProductResponse
 	GetAllProductsResult_Success_DEFAULT       *GetAllProductResponse
-	CreateProductResult_Success_DEFAULT        *EmptyResponse
-	SetDeliveredStatusResult_Success_DEFAULT   *EmptyResponse
-	GetAllProductsArgs_Req_DEFAULT             *EmptyResponse
+	CreateProductResult_Success_DEFAULT        *Empty
+	SetDeliveredStatusResult_Success_DEFAULT   *Empty
+	GetAllProductsArgs_Req_DEFAULT             *Empty
 	GetProductArgs_Req_DEFAULT                 *GetProductRequest
 	CreateProductArgs_Req_DEFAULT              *ChangeProductRequest
 	QueryStockpileArgs_Req_DEFAULT             *QueryStockpileRequest
 	SetDeliveredStatusArgs_Req_DEFAULT         *SetDeliveredStatusRequest
-	RemoveProductResult_Success_DEFAULT        *EmptyResponse
-	UpdateStockpileResult_Success_DEFAULT      *EmptyResponse
-	UpdateProductResult_Success_DEFAULT        *EmptyResponse
+	RemoveProductResult_Success_DEFAULT        *Empty
+	UpdateStockpileResult_Success_DEFAULT      *Empty
+	UpdateProductResult_Success_DEFAULT        *Empty
 	UpdateProductArgs_Req_DEFAULT              *ChangeProductRequest
 	RemoveProductArgs_Req_DEFAULT              *RemoveProductRequest
 	UpdateStockpileArgs_Req_DEFAULT            *UpdateStockpileRequest
@@ -214,6 +214,11 @@ func (x *Product) FastRead(buf []byte, _type int8, number int32) (offset int, er
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -322,7 +327,7 @@ func (x *Stockpile) fastReadField3(buf []byte, _type int8) (offset int, err erro
 	return offset, nil
 }
 
-func (x *EmptyResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *Empty) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
@@ -715,6 +720,7 @@ func (x *Product) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -780,7 +786,7 @@ func (x *Product) fastWriteField8(buf []byte) (offset int) {
 	if x.Id == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetId())
+	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetId())
 	return offset
 }
 
@@ -818,7 +824,7 @@ func (x *Stockpile) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *EmptyResponse) FastWrite(buf []byte) (offset int) {
+func (x *Empty) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1086,6 +1092,7 @@ func (x *Product) Size() (n int) {
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
+	n += x.sizeField8()
 	return n
 }
 
@@ -1151,7 +1158,7 @@ func (x *Product) sizeField8() (n int) {
 	if x.Id == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(1, x.GetId())
+	n += fastpb.SizeInt64(8, x.GetId())
 	return n
 }
 
@@ -1189,7 +1196,7 @@ func (x *Stockpile) sizeField3() (n int) {
 	return n
 }
 
-func (x *EmptyResponse) Size() (n int) {
+func (x *Empty) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1445,7 +1452,7 @@ func (p *QueryStockpileResult) GetResult() interface{} {
 
 func (p *GetAllAdvertisementsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(EmptyResponse)
+		p.Req = new(Empty)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -1472,7 +1479,7 @@ func (p *GetAllAdvertisementsArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *GetAllAdvertisementsArgs) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1480,7 +1487,7 @@ func (p *GetAllAdvertisementsArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *GetAllAdvertisementsArgs) GetReq() *EmptyResponse {
+func (p *GetAllAdvertisementsArgs) GetReq() *Empty {
 	if !p.IsSetReq() {
 		return GetAllAdvertisementsArgs_Req_DEFAULT
 	}
@@ -1553,7 +1560,7 @@ func (p *GetAllAdvertisementsResult) GetResult() interface{} {
 
 func (p *GetAllProductsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(EmptyResponse)
+		p.Req = new(Empty)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -1580,7 +1587,7 @@ func (p *GetAllProductsArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *GetAllProductsArgs) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1588,7 +1595,7 @@ func (p *GetAllProductsArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *GetAllProductsArgs) GetReq() *EmptyResponse {
+func (p *GetAllProductsArgs) GetReq() *Empty {
 	if !p.IsSetReq() {
 		return GetAllProductsArgs_Req_DEFAULT
 	}
@@ -1821,7 +1828,7 @@ func (p *CreateProductArgs) GetFirstArgument() interface{} {
 
 func (p *CreateProductResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -1848,7 +1855,7 @@ func (p *CreateProductResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *CreateProductResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1856,7 +1863,7 @@ func (p *CreateProductResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *CreateProductResult) GetSuccess() *EmptyResponse {
+func (p *CreateProductResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return CreateProductResult_Success_DEFAULT
 	}
@@ -1864,7 +1871,7 @@ func (p *CreateProductResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *CreateProductResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *CreateProductResult) IsSetSuccess() bool {
@@ -1981,7 +1988,7 @@ func (p *SetDeliveredStatusArgs) GetFirstArgument() interface{} {
 
 func (p *SetDeliveredStatusResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -2008,7 +2015,7 @@ func (p *SetDeliveredStatusResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *SetDeliveredStatusResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2016,7 +2023,7 @@ func (p *SetDeliveredStatusResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *SetDeliveredStatusResult) GetSuccess() *EmptyResponse {
+func (p *SetDeliveredStatusResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return SetDeliveredStatusResult_Success_DEFAULT
 	}
@@ -2024,7 +2031,7 @@ func (p *SetDeliveredStatusResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *SetDeliveredStatusResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *SetDeliveredStatusResult) IsSetSuccess() bool {
@@ -2089,7 +2096,7 @@ func (p *UpdateProductArgs) GetFirstArgument() interface{} {
 
 func (p *UpdateProductResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -2116,7 +2123,7 @@ func (p *UpdateProductResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *UpdateProductResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2124,7 +2131,7 @@ func (p *UpdateProductResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *UpdateProductResult) GetSuccess() *EmptyResponse {
+func (p *UpdateProductResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return UpdateProductResult_Success_DEFAULT
 	}
@@ -2132,7 +2139,7 @@ func (p *UpdateProductResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *UpdateProductResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *UpdateProductResult) IsSetSuccess() bool {
@@ -2197,7 +2204,7 @@ func (p *RemoveProductArgs) GetFirstArgument() interface{} {
 
 func (p *RemoveProductResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -2224,7 +2231,7 @@ func (p *RemoveProductResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *RemoveProductResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2232,7 +2239,7 @@ func (p *RemoveProductResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *RemoveProductResult) GetSuccess() *EmptyResponse {
+func (p *RemoveProductResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return RemoveProductResult_Success_DEFAULT
 	}
@@ -2240,7 +2247,7 @@ func (p *RemoveProductResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *RemoveProductResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *RemoveProductResult) IsSetSuccess() bool {
@@ -2305,7 +2312,7 @@ func (p *UpdateStockpileArgs) GetFirstArgument() interface{} {
 
 func (p *UpdateStockpileResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -2332,7 +2339,7 @@ func (p *UpdateStockpileResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *UpdateStockpileResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2340,7 +2347,7 @@ func (p *UpdateStockpileResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *UpdateStockpileResult) GetSuccess() *EmptyResponse {
+func (p *UpdateStockpileResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return UpdateStockpileResult_Success_DEFAULT
 	}
@@ -2348,7 +2355,7 @@ func (p *UpdateStockpileResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *UpdateStockpileResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *UpdateStockpileResult) IsSetSuccess() bool {
@@ -2626,8 +2633,8 @@ func (x *Stockpile) GetProduct() *Product {
 	return nil
 }
 
-func (x *EmptyResponse) Reset() {
-	*x = EmptyResponse{}
+func (x *Empty) Reset() {
+	*x = Empty{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_idl_warehouse_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2635,13 +2642,13 @@ func (x *EmptyResponse) Reset() {
 	}
 }
 
-func (x *EmptyResponse) String() string {
+func (x *Empty) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EmptyResponse) ProtoMessage() {}
+func (*Empty) ProtoMessage() {}
 
-func (x *EmptyResponse) ProtoReflect() protoreflect.Message {
+func (x *Empty) ProtoReflect() protoreflect.Message {
 	mi := &file_idl_warehouse_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2653,8 +2660,8 @@ func (x *EmptyResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmptyResponse.ProtoReflect.Descriptor instead.
-func (*EmptyResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
 	return file_idl_warehouse_proto_rawDescGZIP(), []int{4}
 }
 
@@ -3231,7 +3238,7 @@ var file_idl_warehouse_proto_goTypes = []interface{}{
 	(*Specification)(nil),                // 2: warehouse.Specification
 	(*Product)(nil),                      // 3: warehouse.Product
 	(*Stockpile)(nil),                    // 4: warehouse.Stockpile
-	(*EmptyResponse)(nil),                // 5: warehouse.EmptyResponse
+	(*Empty)(nil),                        // 5: warehouse.Empty
 	(*GetAllAdvertisementsResponse)(nil), // 6: warehouse.GetAllAdvertisementsResponse
 	(*GetAllProductResponse)(nil),        // 7: warehouse.GetAllProductResponse
 	(*GetProductRequest)(nil),            // 8: warehouse.GetProductRequest
@@ -3252,8 +3259,8 @@ var file_idl_warehouse_proto_depIdxs = []int32{
 	3,  // 5: warehouse.ChangeProductRequest.product:type_name -> warehouse.Product
 	4,  // 6: warehouse.QueryStockpileResponse.stockpile:type_name -> warehouse.Stockpile
 	0,  // 7: warehouse.SetDeliveredStatusRequest.status:type_name -> warehouse.DeliveredStatus
-	5,  // 8: warehouse.WarehouseApi.GetAllAdvertisements:input_type -> warehouse.EmptyResponse
-	5,  // 9: warehouse.WarehouseApi.GetAllProducts:input_type -> warehouse.EmptyResponse
+	5,  // 8: warehouse.WarehouseApi.GetAllAdvertisements:input_type -> warehouse.Empty
+	5,  // 9: warehouse.WarehouseApi.GetAllProducts:input_type -> warehouse.Empty
 	8,  // 10: warehouse.WarehouseApi.GetProduct:input_type -> warehouse.GetProductRequest
 	11, // 11: warehouse.WarehouseApi.CreateProduct:input_type -> warehouse.ChangeProductRequest
 	11, // 12: warehouse.WarehouseApi.UpdateProduct:input_type -> warehouse.ChangeProductRequest
@@ -3264,12 +3271,12 @@ var file_idl_warehouse_proto_depIdxs = []int32{
 	6,  // 17: warehouse.WarehouseApi.GetAllAdvertisements:output_type -> warehouse.GetAllAdvertisementsResponse
 	7,  // 18: warehouse.WarehouseApi.GetAllProducts:output_type -> warehouse.GetAllProductResponse
 	10, // 19: warehouse.WarehouseApi.GetProduct:output_type -> warehouse.GetProductResponse
-	5,  // 20: warehouse.WarehouseApi.CreateProduct:output_type -> warehouse.EmptyResponse
-	5,  // 21: warehouse.WarehouseApi.UpdateProduct:output_type -> warehouse.EmptyResponse
-	5,  // 22: warehouse.WarehouseApi.RemoveProduct:output_type -> warehouse.EmptyResponse
-	5,  // 23: warehouse.WarehouseApi.UpdateStockpile:output_type -> warehouse.EmptyResponse
+	5,  // 20: warehouse.WarehouseApi.CreateProduct:output_type -> warehouse.Empty
+	5,  // 21: warehouse.WarehouseApi.UpdateProduct:output_type -> warehouse.Empty
+	5,  // 22: warehouse.WarehouseApi.RemoveProduct:output_type -> warehouse.Empty
+	5,  // 23: warehouse.WarehouseApi.UpdateStockpile:output_type -> warehouse.Empty
 	14, // 24: warehouse.WarehouseApi.QueryStockpile:output_type -> warehouse.QueryStockpileResponse
-	5,  // 25: warehouse.WarehouseApi.SetDeliveredStatus:output_type -> warehouse.EmptyResponse
+	5,  // 25: warehouse.WarehouseApi.SetDeliveredStatus:output_type -> warehouse.Empty
 	17, // [17:26] is the sub-list for method output_type
 	8,  // [8:17] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
@@ -3332,7 +3339,7 @@ func file_idl_warehouse_proto_init() {
 			}
 		}
 		file_idl_warehouse_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EmptyResponse); i {
+			switch v := v.(*Empty); i {
 			case 0:
 				return &v.state
 			case 1:

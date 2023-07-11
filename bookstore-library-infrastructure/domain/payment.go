@@ -126,7 +126,7 @@ type UpdatePaymentStateArgs struct {
 }
 
 type UpdatePaymentStateResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }
 
 type UpdatePaymentStateAliasArgs struct {
@@ -134,5 +134,5 @@ type UpdatePaymentStateAliasArgs struct {
 }
 
 type UpdatePaymentStateAliasResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }

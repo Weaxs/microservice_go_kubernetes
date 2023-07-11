@@ -10,15 +10,15 @@ import (
 
 // AccountClient is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type WarehouseClient interface {
-	GetAllAdvertisements(ctx context.Context, Req *warehouse.EmptyResponse, callOptions ...callopt.Option) (r *warehouse.GetAllAdvertisementsResponse, err error)
-	GetAllProducts(ctx context.Context, Req *warehouse.EmptyResponse, callOptions ...callopt.Option) (r *warehouse.GetAllProductResponse, err error)
+	GetAllAdvertisements(ctx context.Context, Req *warehouse.Empty, callOptions ...callopt.Option) (r *warehouse.GetAllAdvertisementsResponse, err error)
+	GetAllProducts(ctx context.Context, Req *warehouse.Empty, callOptions ...callopt.Option) (r *warehouse.GetAllProductResponse, err error)
 	GetProduct(ctx context.Context, Req *warehouse.GetProductRequest, callOptions ...callopt.Option) (r *warehouse.GetProductResponse, err error)
-	CreateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error)
-	UpdateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error)
-	RemoveProduct(ctx context.Context, Req *warehouse.RemoveProductRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error)
-	UpdateStockpile(ctx context.Context, Req *warehouse.UpdateStockpileRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error)
+	CreateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error)
+	UpdateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error)
+	RemoveProduct(ctx context.Context, Req *warehouse.RemoveProductRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error)
+	UpdateStockpile(ctx context.Context, Req *warehouse.UpdateStockpileRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error)
 	QueryStockpile(ctx context.Context, Req *warehouse.QueryStockpileRequest, callOptions ...callopt.Option) (r *warehouse.QueryStockpileResponse, err error)
-	SetDeliveredStatus(ctx context.Context, Req *warehouse.SetDeliveredStatusRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error)
+	SetDeliveredStatus(ctx context.Context, Req *warehouse.SetDeliveredStatusRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error)
 }
 
 // NewAccountClient creates a client for the service defined in IDL.
@@ -41,12 +41,12 @@ type kWarehouseApiClient struct {
 	*kClient
 }
 
-func (p *kWarehouseApiClient) GetAllAdvertisements(ctx context.Context, Req *warehouse.EmptyResponse, callOptions ...callopt.Option) (r *warehouse.GetAllAdvertisementsResponse, err error) {
+func (p *kWarehouseApiClient) GetAllAdvertisements(ctx context.Context, Req *warehouse.Empty, callOptions ...callopt.Option) (r *warehouse.GetAllAdvertisementsResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetAllAdvertisements(ctx, Req)
 }
 
-func (p *kWarehouseApiClient) GetAllProducts(ctx context.Context, Req *warehouse.EmptyResponse, callOptions ...callopt.Option) (r *warehouse.GetAllProductResponse, err error) {
+func (p *kWarehouseApiClient) GetAllProducts(ctx context.Context, Req *warehouse.Empty, callOptions ...callopt.Option) (r *warehouse.GetAllProductResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetAllProducts(ctx, Req)
 }
@@ -56,22 +56,22 @@ func (p *kWarehouseApiClient) GetProduct(ctx context.Context, Req *warehouse.Get
 	return p.kClient.GetProduct(ctx, Req)
 }
 
-func (p *kWarehouseApiClient) CreateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error) {
+func (p *kWarehouseApiClient) CreateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CreateProduct(ctx, Req)
 }
 
-func (p *kWarehouseApiClient) UpdateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error) {
+func (p *kWarehouseApiClient) UpdateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateProduct(ctx, Req)
 }
 
-func (p *kWarehouseApiClient) RemoveProduct(ctx context.Context, Req *warehouse.RemoveProductRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error) {
+func (p *kWarehouseApiClient) RemoveProduct(ctx context.Context, Req *warehouse.RemoveProductRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.RemoveProduct(ctx, Req)
 }
 
-func (p *kWarehouseApiClient) UpdateStockpile(ctx context.Context, Req *warehouse.UpdateStockpileRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error) {
+func (p *kWarehouseApiClient) UpdateStockpile(ctx context.Context, Req *warehouse.UpdateStockpileRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateStockpile(ctx, Req)
 }
@@ -81,12 +81,12 @@ func (p *kWarehouseApiClient) QueryStockpile(ctx context.Context, Req *warehouse
 	return p.kClient.QueryStockpile(ctx, Req)
 }
 
-func (p *kWarehouseApiClient) SetDeliveredStatus(ctx context.Context, Req *warehouse.SetDeliveredStatusRequest, callOptions ...callopt.Option) (r *warehouse.EmptyResponse, err error) {
+func (p *kWarehouseApiClient) SetDeliveredStatus(ctx context.Context, Req *warehouse.SetDeliveredStatusRequest, callOptions ...callopt.Option) (r *warehouse.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SetDeliveredStatus(ctx, Req)
 }
 
-func (p *kClient) GetAllAdvertisements(ctx context.Context, Req *warehouse.EmptyResponse) (r *warehouse.GetAllAdvertisementsResponse, err error) {
+func (p *kClient) GetAllAdvertisements(ctx context.Context, Req *warehouse.Empty) (r *warehouse.GetAllAdvertisementsResponse, err error) {
 	var _args warehouse.GetAllAdvertisementsArgs
 	_args.Req = Req
 	var _result warehouse.GetAllAdvertisementsResult
@@ -96,7 +96,7 @@ func (p *kClient) GetAllAdvertisements(ctx context.Context, Req *warehouse.Empty
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) GetAllProducts(ctx context.Context, Req *warehouse.EmptyResponse) (r *warehouse.GetAllProductResponse, err error) {
+func (p *kClient) GetAllProducts(ctx context.Context, Req *warehouse.Empty) (r *warehouse.GetAllProductResponse, err error) {
 	var _args warehouse.GetAllProductsArgs
 	_args.Req = Req
 	var _result warehouse.GetAllProductsResult
@@ -116,7 +116,7 @@ func (p *kClient) GetProduct(ctx context.Context, Req *warehouse.GetProductReque
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) CreateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest) (r *warehouse.EmptyResponse, err error) {
+func (p *kClient) CreateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest) (r *warehouse.Empty, err error) {
 	var _args warehouse.CreateProductArgs
 	_args.Req = Req
 	var _result warehouse.CreateProductResult
@@ -126,7 +126,7 @@ func (p *kClient) CreateProduct(ctx context.Context, Req *warehouse.ChangeProduc
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest) (r *warehouse.EmptyResponse, err error) {
+func (p *kClient) UpdateProduct(ctx context.Context, Req *warehouse.ChangeProductRequest) (r *warehouse.Empty, err error) {
 	var _args warehouse.UpdateProductArgs
 	_args.Req = Req
 	var _result warehouse.UpdateProductResult
@@ -136,7 +136,7 @@ func (p *kClient) UpdateProduct(ctx context.Context, Req *warehouse.ChangeProduc
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) RemoveProduct(ctx context.Context, Req *warehouse.RemoveProductRequest) (r *warehouse.EmptyResponse, err error) {
+func (p *kClient) RemoveProduct(ctx context.Context, Req *warehouse.RemoveProductRequest) (r *warehouse.Empty, err error) {
 	var _args warehouse.RemoveProductArgs
 	_args.Req = Req
 	var _result warehouse.RemoveProductResult
@@ -146,7 +146,7 @@ func (p *kClient) RemoveProduct(ctx context.Context, Req *warehouse.RemoveProduc
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdateStockpile(ctx context.Context, Req *warehouse.UpdateStockpileRequest) (r *warehouse.EmptyResponse, err error) {
+func (p *kClient) UpdateStockpile(ctx context.Context, Req *warehouse.UpdateStockpileRequest) (r *warehouse.Empty, err error) {
 	var _args warehouse.UpdateStockpileArgs
 	_args.Req = Req
 	var _result warehouse.UpdateStockpileResult
@@ -166,7 +166,7 @@ func (p *kClient) QueryStockpile(ctx context.Context, Req *warehouse.QueryStockp
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) SetDeliveredStatus(ctx context.Context, Req *warehouse.SetDeliveredStatusRequest) (r *warehouse.EmptyResponse, err error) {
+func (p *kClient) SetDeliveredStatus(ctx context.Context, Req *warehouse.SetDeliveredStatusRequest) (r *warehouse.Empty, err error) {
 	var _args warehouse.SetDeliveredStatusArgs
 	_args.Req = Req
 	var _result warehouse.SetDeliveredStatusResult

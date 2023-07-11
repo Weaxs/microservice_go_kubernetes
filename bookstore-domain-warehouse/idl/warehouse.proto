@@ -43,7 +43,7 @@ message Stockpile {
   Product product = 3;
 }
 
-message EmptyResponse {
+message Empty {
 }
 
 message GetAllAdvertisementsResponse {
@@ -91,21 +91,21 @@ message SetDeliveredStatusRequest {
 
 service WarehouseApi {
   // 获取所有的广告信息
-  rpc GetAllAdvertisements (EmptyResponse) returns (GetAllAdvertisementsResponse);
+  rpc GetAllAdvertisements (Empty) returns (GetAllAdvertisementsResponse);
 
   // 获取仓库中所有的货物信息
-  rpc GetAllProducts (EmptyResponse) returns (GetAllProductResponse);
+  rpc GetAllProducts (Empty) returns (GetAllProductResponse);
   // 获取仓库中指定的货物信息
   rpc GetProduct (GetProductRequest) returns (GetProductResponse);
   // 创建新的产品
-  rpc CreateProduct (ChangeProductRequest) returns (EmptyResponse);
+  rpc CreateProduct (ChangeProductRequest) returns (Empty);
   // 更新产品信息
-  rpc UpdateProduct (ChangeProductRequest) returns (EmptyResponse);
+  rpc UpdateProduct (ChangeProductRequest) returns (Empty);
   // 移出产品信息
-  rpc RemoveProduct (RemoveProductRequest) returns (EmptyResponse);
+  rpc RemoveProduct (RemoveProductRequest) returns (Empty);
 
   // 将指定的产品库存调整为指定数额
-  rpc UpdateStockpile (UpdateStockpileRequest) returns (EmptyResponse);
+  rpc UpdateStockpile (UpdateStockpileRequest) returns (Empty);
   rpc QueryStockpile (QueryStockpileRequest) returns (QueryStockpileResponse);
-  rpc SetDeliveredStatus (SetDeliveredStatusRequest) returns (EmptyResponse);
+  rpc SetDeliveredStatus (SetDeliveredStatusRequest) returns (Empty);
 }

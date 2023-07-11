@@ -15,7 +15,7 @@ func TestWarehouseClient(t *testing.T) {
 	if err != nil {
 		panic(any(err))
 	}
-	products, err := client.GetAllProducts(context.Background(), &domain.EmptyResponse{})
+	products, err := client.GetAllProducts(context.Background(), &domain.Empty{})
 	if err != nil {
 		panic(any(err))
 	}

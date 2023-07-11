@@ -23,7 +23,7 @@ func NewWarehouseClient() (*WarehouseClient, error) {
 }
 
 func (c *WarehouseClient) GetProducts(ctx context.Context) (products []*domain.Product, err error) {
-	resp, err := c.client.GetAllProducts(ctx, &domain.EmptyResponse{})
+	resp, err := c.client.GetAllProducts(ctx, &domain.Empty{})
 	if err != nil {
 		return nil, err
 	}

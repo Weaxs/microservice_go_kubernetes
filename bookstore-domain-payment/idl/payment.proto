@@ -65,6 +65,6 @@ message UpdatePaymentStateAlias {
 
 service PaymentApi {
   rpc executeSettlement (ExecuteSettlementRequest) returns (ExecuteSettlementResponse);
-  rpc updatePaymentState (UpdatePaymentStateRequest) returns (warehouse.EmptyResponse);
-  rpc updatePaymentStateAlias (UpdatePaymentStateAlias) returns (warehouse.EmptyResponse);
+  rpc updatePaymentState (UpdatePaymentStateRequest) returns (warehouse.Empty);
+  rpc updatePaymentStateAlias (UpdatePaymentStateAlias) returns (warehouse.Empty);
 }

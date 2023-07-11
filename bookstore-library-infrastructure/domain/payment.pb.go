@@ -20,11 +20,11 @@ import (
 )
 
 var (
-	UpdatePaymentStateAliasResult_Success_DEFAULT *EmptyResponse
+	UpdatePaymentStateAliasResult_Success_DEFAULT *Empty
 	ExecuteSettlementArgs_Req_DEFAULT             *ExecuteSettlementRequest
 	ExecuteSettlementResult_Success_DEFAULT       *ExecuteSettlementResponse
 	UpdatePaymentStateArgs_Req_DEFAULT            *UpdatePaymentStateRequest
-	UpdatePaymentStateResult_Success_DEFAULT      *EmptyResponse
+	UpdatePaymentStateResult_Success_DEFAULT      *Empty
 	UpdatePaymentStateAliasArgs_Req_DEFAULT       *UpdatePaymentStateAlias
 )
 
@@ -640,7 +640,7 @@ var file_payment_proto_goTypes = []interface{}{
 	nil,                               // 9: payment.Settlement.ProductMapEntry
 	(*timestamppb.Timestamp)(nil),     // 10: google.protobuf.Timestamp
 	(*Product)(nil),                   // 11: domain.Product
-	(*EmptyResponse)(nil),             // 12: domain.EmptyResponse
+	(*Empty)(nil),                     // 12: domain.Empty
 }
 var file_payment_proto_depIdxs = []int32{
 	10, // 0: payment.Payment.createTime:type_name -> google.protobuf.Timestamp
@@ -657,8 +657,8 @@ var file_payment_proto_depIdxs = []int32{
 	7,  // 11: payment.PaymentApi.updatePaymentState:input_type -> payment.UpdatePaymentStateRequest
 	8,  // 12: payment.PaymentApi.updatePaymentStateAlias:input_type -> payment.UpdatePaymentStateAlias
 	6,  // 13: payment.PaymentApi.executeSettlement:output_type -> payment.ExecuteSettlementResponse
-	12, // 14: payment.PaymentApi.updatePaymentState:output_type -> domain.EmptyResponse
-	12, // 15: payment.PaymentApi.updatePaymentStateAlias:output_type -> domain.EmptyResponse
+	12, // 14: payment.PaymentApi.updatePaymentState:output_type -> domain.Empty
+	12, // 15: payment.PaymentApi.updatePaymentStateAlias:output_type -> domain.Empty
 	13, // [13:16] is the sub-list for method output_type
 	10, // [10:13] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -794,8 +794,8 @@ func file_payment_proto_init() {
 
 type PaymentApi interface {
 	ExecuteSettlement(ctx context.Context, req *ExecuteSettlementRequest) (res *ExecuteSettlementResponse, err error)
-	UpdatePaymentState(ctx context.Context, req *UpdatePaymentStateRequest) (res *EmptyResponse, err error)
-	UpdatePaymentStateAlias(ctx context.Context, req *UpdatePaymentStateAlias) (res *EmptyResponse, err error)
+	UpdatePaymentState(ctx context.Context, req *UpdatePaymentStateRequest) (res *Empty, err error)
+	UpdatePaymentStateAlias(ctx context.Context, req *UpdatePaymentStateAlias) (res *Empty, err error)
 }
 
 func (x *Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1894,7 +1894,7 @@ func (p *UpdatePaymentStateArgs) GetFirstArgument() interface{} {
 
 func (p *UpdatePaymentStateResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -1921,7 +1921,7 @@ func (p *UpdatePaymentStateResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *UpdatePaymentStateResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1929,7 +1929,7 @@ func (p *UpdatePaymentStateResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *UpdatePaymentStateResult) GetSuccess() *EmptyResponse {
+func (p *UpdatePaymentStateResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return UpdatePaymentStateResult_Success_DEFAULT
 	}
@@ -1937,7 +1937,7 @@ func (p *UpdatePaymentStateResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *UpdatePaymentStateResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *UpdatePaymentStateResult) IsSetSuccess() bool {
@@ -2002,7 +2002,7 @@ func (p *UpdatePaymentStateAliasArgs) GetFirstArgument() interface{} {
 
 func (p *UpdatePaymentStateAliasResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(EmptyResponse)
+		p.Success = new(Empty)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -2029,7 +2029,7 @@ func (p *UpdatePaymentStateAliasResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *UpdatePaymentStateAliasResult) Unmarshal(in []byte) error {
-	msg := new(EmptyResponse)
+	msg := new(Empty)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2037,7 +2037,7 @@ func (p *UpdatePaymentStateAliasResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *UpdatePaymentStateAliasResult) GetSuccess() *EmptyResponse {
+func (p *UpdatePaymentStateAliasResult) GetSuccess() *Empty {
 	if !p.IsSetSuccess() {
 		return UpdatePaymentStateAliasResult_Success_DEFAULT
 	}
@@ -2045,7 +2045,7 @@ func (p *UpdatePaymentStateAliasResult) GetSuccess() *EmptyResponse {
 }
 
 func (p *UpdatePaymentStateAliasResult) SetSuccess(x interface{}) {
-	p.Success = x.(*EmptyResponse)
+	p.Success = x.(*Empty)
 }
 
 func (p *UpdatePaymentStateAliasResult) IsSetSuccess() bool {

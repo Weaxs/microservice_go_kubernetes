@@ -19,7 +19,7 @@ func (s *handler) ExecuteSettlement(ctx context.Context, req *domain.ExecuteSett
 }
 
 // UpdatePaymentState implements the handler interface.
-func (s *handler) UpdatePaymentState(ctx context.Context, req *domain.UpdatePaymentStateRequest) (resp *domain.EmptyResponse, err error) {
+func (s *handler) UpdatePaymentState(ctx context.Context, req *domain.UpdatePaymentStateRequest) (resp *domain.Empty, err error) {
 	account := ctx.Value("account")
 	if account == nil {
 		return nil, errors.New("there is no account in context")
@@ -29,7 +29,7 @@ func (s *handler) UpdatePaymentState(ctx context.Context, req *domain.UpdatePaym
 }
 
 // UpdatePaymentStateAlias implements the handler interface.
-func (s *handler) UpdatePaymentStateAlias(ctx context.Context, req *domain.UpdatePaymentStateAlias) (resp *domain.EmptyResponse, err error) {
+func (s *handler) UpdatePaymentStateAlias(ctx context.Context, req *domain.UpdatePaymentStateAlias) (resp *domain.Empty, err error) {
 	state := req.State
 	if state == domain.PaymentState_PAYED {
 		err = paymentService.AccomplishPayment(ctx, req.PayId, req.AccountId)

@@ -83,7 +83,7 @@ type Stockpile struct {
 	Product *Product `protobuf:"bytes,3,opt,name=product,proto3" json:"product,omitempty"`
 }
 
-type EmptyResponse struct {
+type Empty struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -177,7 +177,7 @@ type QueryStockpileResult struct {
 }
 
 type GetAllAdvertisementsArgs struct {
-	Req *EmptyResponse
+	Req *Empty
 }
 
 type GetAllAdvertisementsResult struct {
@@ -189,7 +189,7 @@ type GetAllProductsResult struct {
 }
 
 type GetAllProductsArgs struct {
-	Req *EmptyResponse
+	Req *Empty
 }
 
 type GetProductArgs struct {
@@ -205,7 +205,7 @@ type CreateProductArgs struct {
 }
 
 type CreateProductResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }
 
 type UpdateProductArgs struct {
@@ -220,22 +220,22 @@ type SetDeliveredStatusArgs struct {
 	Req *SetDeliveredStatusRequest
 }
 type SetDeliveredStatusResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }
 type RemoveProductArgs struct {
 	Req *RemoveProductRequest
 }
 
 type RemoveProductResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }
 type UpdateStockpileArgs struct {
 	Req *UpdateStockpileRequest
 }
 type UpdateStockpileResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }
 
 type UpdateProductResult struct {
-	Success *EmptyResponse
+	Success *Empty
 }

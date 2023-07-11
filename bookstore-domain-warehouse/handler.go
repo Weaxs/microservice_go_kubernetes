@@ -9,7 +9,7 @@ import (
 type handler struct{}
 
 // GetAllAdvertisements implements the handler interface.
-func (s *handler) GetAllAdvertisements(ctx context.Context, req *domain.EmptyResponse) (resp *domain.GetAllAdvertisementsResponse, err error) {
+func (s *handler) GetAllAdvertisements(ctx context.Context, req *domain.Empty) (resp *domain.GetAllAdvertisementsResponse, err error) {
 	advertises, err := advertiseService.GetAll(ctx)
 	if err != nil {
 		return nil, err
@@ -18,7 +18,7 @@ func (s *handler) GetAllAdvertisements(ctx context.Context, req *domain.EmptyRes
 }
 
 // GetAllProducts implements the handler interface.
-func (s *handler) GetAllProducts(ctx context.Context, req *domain.EmptyResponse) (resp *domain.GetAllProductResponse, err error) {
+func (s *handler) GetAllProducts(ctx context.Context, req *domain.Empty) (resp *domain.GetAllProductResponse, err error) {
 	products, err := productService.GetAll(ctx)
 	if err != nil {
 		return nil, err
@@ -36,39 +36,39 @@ func (s *handler) GetProduct(ctx context.Context, req *domain.GetProductRequest)
 }
 
 // CreateProduct implements the handler interface.
-func (s *handler) CreateProduct(ctx context.Context, req *domain.ChangeProductRequest) (resp *domain.EmptyResponse, err error) {
+func (s *handler) CreateProduct(ctx context.Context, req *domain.ChangeProductRequest) (resp *domain.Empty, err error) {
 	err = productService.Create(ctx, req.Product)
 	if err != nil {
 		return nil, err
 	}
-	return &domain.EmptyResponse{}, nil
+	return &domain.Empty{}, nil
 }
 
 // UpdateProduct implements the handler interface.
-func (s *handler) UpdateProduct(ctx context.Context, req *domain.ChangeProductRequest) (resp *domain.EmptyResponse, err error) {
+func (s *handler) UpdateProduct(ctx context.Context, req *domain.ChangeProductRequest) (resp *domain.Empty, err error) {
 	err = productService.Update(ctx, req.Product)
 	if err != nil {
 		return nil, err
 	}
-	return &domain.EmptyResponse{}, nil
+	return &domain.Empty{}, nil
 }
 
 // RemoveProduct implements the handler interface.
-func (s *handler) RemoveProduct(ctx context.Context, req *domain.RemoveProductRequest) (resp *domain.EmptyResponse, err error) {
+func (s *handler) RemoveProduct(ctx context.Context, req *domain.RemoveProductRequest) (resp *domain.Empty, err error) {
 	err = productService.RemoveById(ctx, req.Id)
 	if err != nil {
 		return nil, err
 	}
-	return &domain.EmptyResponse{}, nil
+	return &domain.Empty{}, nil
 }
 
 // UpdateStockpile implements the handler interface.
-func (s *handler) UpdateStockpile(ctx context.Context, req *domain.UpdateStockpileRequest) (resp *domain.EmptyResponse, err error) {
+func (s *handler) UpdateStockpile(ctx context.Context, req *domain.UpdateStockpileRequest) (resp *domain.Empty, err error) {
 	err = stockpileService.Update(ctx, req.ProductId, req.Amount)
 	if err != nil {
 		return nil, err
 	}
-	return &domain.EmptyResponse{}, nil
+	return &domain.Empty{}, nil
 }
 
 // QueryStockpile implements the handler interface.
@@ -81,10 +81,10 @@ func (s *handler) QueryStockpile(ctx context.Context, req *domain.QueryStockpile
 }
 
 // SetDeliveredStatus implements the handler interface.
-func (s *handler) SetDeliveredStatus(ctx context.Context, req *domain.SetDeliveredStatusRequest) (resp *domain.EmptyResponse, err error) {
+func (s *handler) SetDeliveredStatus(ctx context.Context, req *domain.SetDeliveredStatusRequest) (resp *domain.Empty, err error) {
 	err = stockpileService.SetDeliveredStatus(ctx, req.ProductId, req.Amount, req.Status)
 	if err != nil {
 		return nil, err
 	}
-	return &domain.EmptyResponse{}, nil
+	return &domain.Empty{}, nil
 }

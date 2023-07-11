@@ -33,12 +33,12 @@ func (p *kPaymentApiClient) ExecuteSettlement(ctx context.Context, Req *domain.E
 	return p.kClient.ExecuteSettlement(ctx, Req)
 }
 
-func (p *kPaymentApiClient) UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest, callOptions ...callopt.Option) (r *domain.EmptyResponse, err error) {
+func (p *kPaymentApiClient) UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest, callOptions ...callopt.Option) (r *domain.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdatePaymentState(ctx, Req)
 }
 
-func (p *kPaymentApiClient) UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias, callOptions ...callopt.Option) (r *domain.EmptyResponse, err error) {
+func (p *kPaymentApiClient) UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias, callOptions ...callopt.Option) (r *domain.Empty, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdatePaymentStateAlias(ctx, Req)
 }
@@ -53,7 +53,7 @@ func (p *kClient) ExecuteSettlement(ctx context.Context, Req *domain.ExecuteSett
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest) (r *domain.EmptyResponse, err error) {
+func (p *kClient) UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest) (r *domain.Empty, err error) {
 	var _args domain.UpdatePaymentStateArgs
 	_args.Req = Req
 	var _result domain.UpdatePaymentStateResult
@@ -63,7 +63,7 @@ func (p *kClient) UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaym
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias) (r *domain.EmptyResponse, err error) {
+func (p *kClient) UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias) (r *domain.Empty, err error) {
 	var _args domain.UpdatePaymentStateAliasArgs
 	_args.Req = Req
 	var _result domain.UpdatePaymentStateAliasResult

@@ -43,7 +43,7 @@ func getAllAdvertisementsHandler(ctx context.Context, handler interface{}, arg, 
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(warehouse.EmptyResponse)
+		req := new(warehouse.Empty)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -69,7 +69,7 @@ func getAllProductsHandler(ctx context.Context, handler interface{}, arg, result
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(warehouse.EmptyResponse)
+		req := new(warehouse.Empty)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}

@@ -24,6 +24,7 @@ func getAccount(ctx context.Context, username string) (account *domain.Account, 
 
 	klog.CtxDebugf(ctx, "get from db")
 	return &domain.Account{
+		Id:        po.Id,
 		Username:  po.Username,
 		Password:  po.Password,
 		Name:      po.Name,

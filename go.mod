@@ -8,7 +8,9 @@ require (
 	github.com/cloudwego/fastpb v0.0.4
 	github.com/cloudwego/kitex v0.6.1
 	github.com/golang/protobuf v1.5.2
+	github.com/google/uuid v1.1.2
 	github.com/kitex-contrib/obs-opentelemetry/logging/logrus v0.0.0-20230512024524-5f5a227105f7
+	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/protobuf v1.28.1
 	gorm.io/driver/mysql v1.5.1

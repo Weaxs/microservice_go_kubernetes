@@ -69,24 +69,6 @@ var (
 	}
 )
 
-// Enum value maps for PaymentState.
-var (
-	PaymentState_name = map[int32]string{
-		0: "WAITING",
-		1: "CANCEL",
-		2: "PAYED",
-		3: "TIMEOUT",
-		4: "NOT_SUPPORT",
-	}
-	PaymentState_value = map[string]int32{
-		"WAITING":     0,
-		"CANCEL":      1,
-		"PAYED":       2,
-		"TIMEOUT":     3,
-		"NOT_SUPPORT": 4,
-	}
-)
-
 func (x PaymentState) Enum() *PaymentState {
 	p := new(PaymentState)
 	*p = x

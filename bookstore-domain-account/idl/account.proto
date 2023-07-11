@@ -5,13 +5,14 @@ package account;
 option go_package = "account";
 
 message Account {
-  string username = 1;
-  string password = 2;
-  string name = 3;
-  string avatar = 4;
-  string telephone = 5;
-  string email = 6;
-  string location = 7;
+  int64 id = 1;
+  string username = 2;
+  string password = 3;
+  string name = 4;
+  string avatar = 5;
+  string telephone = 6;
+  string email = 7;
+  string location = 8;
 }
 
 message GetAccountRequest {

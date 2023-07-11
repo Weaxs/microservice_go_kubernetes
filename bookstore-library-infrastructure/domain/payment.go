@@ -16,6 +16,24 @@ const (
 	PaymentState_NOT_SUPPORT PaymentState = 4
 )
 
+// Enum value maps for PaymentState.
+var (
+	PaymentState_name = map[int32]string{
+		0: "WAITING",
+		1: "CANCEL",
+		2: "PAYED",
+		3: "TIMEOUT",
+		4: "NOT_SUPPORT",
+	}
+	PaymentState_value = map[string]int32{
+		"WAITING":     0,
+		"CANCEL":      1,
+		"PAYED":       2,
+		"TIMEOUT":     3,
+		"NOT_SUPPORT": 4,
+	}
+)
+
 type Item struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -49,14 +67,14 @@ type Payment struct {
 	PayState    PaymentState           `protobuf:"varint,6,opt,name=payState,proto3,enum=payment.PaymentState" json:"payState,omitempty"`
 }
 
-// 支付结算单
+// Settlement 支付结算单
 type Settlement struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Items      []*Item            `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Purchase   *Purchase          `protobuf:"bytes,2,opt,name=purchase,proto3" json:"purchase,omitempty"`
+	Purchase   *Purchase          `protobuf:"bytes,2,opt,name=purchase,proto3" json:"purchase,omitempty" valid:"required"`
 	ProductMap map[int64]*Product `protobuf:"bytes,3,rep,name=productMap,proto3" json:"productMap,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 

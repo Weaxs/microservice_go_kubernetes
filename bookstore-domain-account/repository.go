@@ -10,7 +10,7 @@ var (
 )
 
 type AccountPo struct {
-	Id        int    `gorm:"primaryKey;autoIncrement:true" sql:"id"`
+	Id        int64  `gorm:"primaryKey;autoIncrement:true" sql:"id"`
 	Username  string `gorm:"index" sql:"username"`
 	Password  string `gorm:"<-:create" sql:"password"`
 	Name      string `sql:"name"`

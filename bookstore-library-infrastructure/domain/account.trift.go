@@ -9,13 +9,14 @@ import (
 
 var (
 	fieldIDToName_Account = map[int16]string{
-		1: "username",
-		2: "password",
-		3: "name",
-		4: "avatar",
-		5: "telephone",
-		6: "email",
-		7: "location",
+		1: "id",
+		2: "username",
+		3: "password",
+		4: "name",
+		5: "avatar",
+		6: "telephone",
+		7: "email",
+		8: "location",
 	}
 
 	fieldIDToName_GetAccountArgs = map[int16]string{
@@ -41,6 +42,10 @@ func NewAccount() *Account {
 
 func (p *Account) InitDefault() {
 	*p = Account{}
+}
+
+func (p *Account) GetId() (v int64) {
+	return p.Id
 }
 
 func (p *Account) GetUsername() (v string) {
@@ -69,6 +74,9 @@ func (p *Account) GetEmail() (v string) {
 
 func (p *Account) GetLocation() (v string) {
 	return p.Location
+}
+func (p *Account) SetId(val int64) {
+	p.Id = val
 }
 func (p *Account) SetUsername(val string) {
 	p.Username = val
@@ -112,7 +120,7 @@ func (p *Account) Read(iprot thrift.TProtocol) (err error) {
 
 		switch fieldId {
 		case 1:
-			if fieldTypeId == thrift.STRING {
+			if fieldTypeId == thrift.I64 {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -181,6 +189,16 @@ func (p *Account) Read(iprot thrift.TProtocol) (err error) {
 					goto SkipFieldError
 				}
 			}
+		case 8:
+			if fieldTypeId == thrift.STRING {
+				if err = p.ReadField8(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				if err = iprot.Skip(fieldTypeId); err != nil {
+					goto SkipFieldError
+				}
+			}
 		default:
 			if err = iprot.Skip(fieldTypeId); err != nil {
 				goto SkipFieldError
@@ -212,10 +230,10 @@ ReadStructEndError:
 }
 
 func (p *Account) ReadField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
+	if v, err := iprot.ReadI64(); err != nil {
 		return err
 	} else {
-		p.Username = v
+		p.Id = v
 	}
 	return nil
 }
@@ -224,7 +242,7 @@ func (p *Account) ReadField2(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Password = v
+		p.Username = v
 	}
 	return nil
 }
@@ -233,7 +251,7 @@ func (p *Account) ReadField3(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Name = v
+		p.Password = v
 	}
 	return nil
 }
@@ -242,7 +260,7 @@ func (p *Account) ReadField4(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Avatar = v
+		p.Name = v
 	}
 	return nil
 }
@@ -251,7 +269,7 @@ func (p *Account) ReadField5(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Telephone = v
+		p.Avatar = v
 	}
 	return nil
 }
@@ -260,12 +278,21 @@ func (p *Account) ReadField6(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Email = v
+		p.Telephone = v
 	}
 	return nil
 }
 
 func (p *Account) ReadField7(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadString(); err != nil {
+		return err
+	} else {
+		p.Email = v
+	}
+	return nil
+}
+
+func (p *Account) ReadField8(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
@@ -308,6 +335,10 @@ func (p *Account) Write(oprot thrift.TProtocol) (err error) {
 			fieldId = 7
 			goto WriteFieldError
 		}
+		if err = p.writeField8(oprot); err != nil {
+			fieldId = 8
+			goto WriteFieldError
+		}
 
 	}
 	if err = oprot.WriteFieldStop(); err != nil {
@@ -328,10 +359,10 @@ WriteStructEndError:
 }
 
 func (p *Account) writeField1(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("username", thrift.STRING, 1); err != nil {
+	if err = oprot.WriteFieldBegin("id", thrift.I64, 1); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Username); err != nil {
+	if err := oprot.WriteI64(p.Id); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -345,10 +376,10 @@ WriteFieldEndError:
 }
 
 func (p *Account) writeField2(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("password", thrift.STRING, 2); err != nil {
+	if err = oprot.WriteFieldBegin("username", thrift.STRING, 2); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Password); err != nil {
+	if err := oprot.WriteString(p.Username); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -362,10 +393,10 @@ WriteFieldEndError:
 }
 
 func (p *Account) writeField3(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("name", thrift.STRING, 3); err != nil {
+	if err = oprot.WriteFieldBegin("password", thrift.STRING, 3); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Name); err != nil {
+	if err := oprot.WriteString(p.Password); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -379,10 +410,10 @@ WriteFieldEndError:
 }
 
 func (p *Account) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("avatar", thrift.STRING, 4); err != nil {
+	if err = oprot.WriteFieldBegin("name", thrift.STRING, 4); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Avatar); err != nil {
+	if err := oprot.WriteString(p.Name); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -396,10 +427,10 @@ WriteFieldEndError:
 }
 
 func (p *Account) writeField5(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("telephone", thrift.STRING, 5); err != nil {
+	if err = oprot.WriteFieldBegin("avatar", thrift.STRING, 5); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Telephone); err != nil {
+	if err := oprot.WriteString(p.Avatar); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -413,10 +444,10 @@ WriteFieldEndError:
 }
 
 func (p *Account) writeField6(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("email", thrift.STRING, 6); err != nil {
+	if err = oprot.WriteFieldBegin("telephone", thrift.STRING, 6); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Email); err != nil {
+	if err := oprot.WriteString(p.Telephone); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -430,10 +461,10 @@ WriteFieldEndError:
 }
 
 func (p *Account) writeField7(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("location", thrift.STRING, 7); err != nil {
+	if err = oprot.WriteFieldBegin("email", thrift.STRING, 7); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Location); err != nil {
+	if err := oprot.WriteString(p.Email); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -444,6 +475,23 @@ WriteFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 7 begin error: ", p), err)
 WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 7 end error: ", p), err)
+}
+
+func (p *Account) writeField8(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("location", thrift.STRING, 8); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteString(p.Location); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 8 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 8 end error: ", p), err)
 }
 
 func (p *Account) String() string {
@@ -459,73 +507,83 @@ func (p *Account) DeepEqual(ano *Account) bool {
 	} else if p == nil || ano == nil {
 		return false
 	}
-	if !p.Field1DeepEqual(ano.Username) {
+	if !p.Field1DeepEqual(ano.Id) {
 		return false
 	}
-	if !p.Field2DeepEqual(ano.Password) {
+	if !p.Field2DeepEqual(ano.Username) {
 		return false
 	}
-	if !p.Field3DeepEqual(ano.Name) {
+	if !p.Field3DeepEqual(ano.Password) {
 		return false
 	}
-	if !p.Field4DeepEqual(ano.Avatar) {
+	if !p.Field4DeepEqual(ano.Name) {
 		return false
 	}
-	if !p.Field5DeepEqual(ano.Telephone) {
+	if !p.Field5DeepEqual(ano.Avatar) {
 		return false
 	}
-	if !p.Field6DeepEqual(ano.Email) {
+	if !p.Field6DeepEqual(ano.Telephone) {
 		return false
 	}
-	if !p.Field7DeepEqual(ano.Location) {
+	if !p.Field7DeepEqual(ano.Email) {
+		return false
+	}
+	if !p.Field8DeepEqual(ano.Location) {
 		return false
 	}
 	return true
 }
 
-func (p *Account) Field1DeepEqual(src string) bool {
+func (p *Account) Field1DeepEqual(src int64) bool {
 
-	if strings.Compare(p.Username, src) != 0 {
+	if p.Id != src {
 		return false
 	}
 	return true
 }
 func (p *Account) Field2DeepEqual(src string) bool {
 
-	if strings.Compare(p.Password, src) != 0 {
+	if strings.Compare(p.Username, src) != 0 {
 		return false
 	}
 	return true
 }
 func (p *Account) Field3DeepEqual(src string) bool {
 
-	if strings.Compare(p.Name, src) != 0 {
+	if strings.Compare(p.Password, src) != 0 {
 		return false
 	}
 	return true
 }
 func (p *Account) Field4DeepEqual(src string) bool {
 
-	if strings.Compare(p.Avatar, src) != 0 {
+	if strings.Compare(p.Name, src) != 0 {
 		return false
 	}
 	return true
 }
 func (p *Account) Field5DeepEqual(src string) bool {
 
-	if strings.Compare(p.Telephone, src) != 0 {
+	if strings.Compare(p.Avatar, src) != 0 {
 		return false
 	}
 	return true
 }
 func (p *Account) Field6DeepEqual(src string) bool {
 
-	if strings.Compare(p.Email, src) != 0 {
+	if strings.Compare(p.Telephone, src) != 0 {
 		return false
 	}
 	return true
 }
 func (p *Account) Field7DeepEqual(src string) bool {
+
+	if strings.Compare(p.Email, src) != 0 {
+		return false
+	}
+	return true
+}
+func (p *Account) Field8DeepEqual(src string) bool {
 
 	if strings.Compare(p.Location, src) != 0 {
 		return false
@@ -1803,7 +1861,7 @@ func (p *Account) FastRead(buf []byte) (int, error) {
 		}
 		switch fieldId {
 		case 1:
-			if fieldTypeId == thrift.STRING {
+			if fieldTypeId == thrift.I64 {
 				l, err = p.FastReadField1(buf[offset:])
 				offset += l
 				if err != nil {
@@ -1900,6 +1958,20 @@ func (p *Account) FastRead(buf []byte) (int, error) {
 					goto SkipFieldError
 				}
 			}
+		case 8:
+			if fieldTypeId == thrift.STRING {
+				l, err = p.FastReadField8(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
 		default:
 			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
 			offset += l
@@ -1938,12 +2010,12 @@ ReadStructEndError:
 func (p *Account) FastReadField1(buf []byte) (int, error) {
 	offset := 0
 
-	if v, l, err := bthrift.Binary.ReadString(buf[offset:]); err != nil {
+	if v, l, err := bthrift.Binary.ReadI64(buf[offset:]); err != nil {
 		return offset, err
 	} else {
 		offset += l
 
-		p.Username = v
+		p.Id = v
 
 	}
 	return offset, nil
@@ -1957,7 +2029,7 @@ func (p *Account) FastReadField2(buf []byte) (int, error) {
 	} else {
 		offset += l
 
-		p.Password = v
+		p.Username = v
 
 	}
 	return offset, nil
@@ -1971,7 +2043,7 @@ func (p *Account) FastReadField3(buf []byte) (int, error) {
 	} else {
 		offset += l
 
-		p.Name = v
+		p.Password = v
 
 	}
 	return offset, nil
@@ -1985,7 +2057,7 @@ func (p *Account) FastReadField4(buf []byte) (int, error) {
 	} else {
 		offset += l
 
-		p.Avatar = v
+		p.Name = v
 
 	}
 	return offset, nil
@@ -1999,7 +2071,7 @@ func (p *Account) FastReadField5(buf []byte) (int, error) {
 	} else {
 		offset += l
 
-		p.Telephone = v
+		p.Avatar = v
 
 	}
 	return offset, nil
@@ -2013,13 +2085,27 @@ func (p *Account) FastReadField6(buf []byte) (int, error) {
 	} else {
 		offset += l
 
-		p.Email = v
+		p.Telephone = v
 
 	}
 	return offset, nil
 }
 
 func (p *Account) FastReadField7(buf []byte) (int, error) {
+	offset := 0
+
+	if v, l, err := bthrift.Binary.ReadString(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+
+		p.Email = v
+
+	}
+	return offset, nil
+}
+
+func (p *Account) FastReadField8(buf []byte) (int, error) {
 	offset := 0
 
 	if v, l, err := bthrift.Binary.ReadString(buf[offset:]); err != nil {
@@ -2049,6 +2135,7 @@ func (p *Account) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter)
 		offset += p.fastWriteField5(buf[offset:], binaryWriter)
 		offset += p.fastWriteField6(buf[offset:], binaryWriter)
 		offset += p.fastWriteField7(buf[offset:], binaryWriter)
+		offset += p.fastWriteField8(buf[offset:], binaryWriter)
 	}
 	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
 	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
@@ -2066,6 +2153,7 @@ func (p *Account) BLength() int {
 		l += p.field5Length()
 		l += p.field6Length()
 		l += p.field7Length()
+		l += p.field8Length()
 	}
 	l += bthrift.Binary.FieldStopLength()
 	l += bthrift.Binary.StructEndLength()
@@ -2074,8 +2162,8 @@ func (p *Account) BLength() int {
 
 func (p *Account) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "username", thrift.STRING, 1)
-	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Username)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "id", thrift.I64, 1)
+	offset += bthrift.Binary.WriteI64(buf[offset:], p.Id)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
@@ -2083,8 +2171,8 @@ func (p *Account) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) fastWriteField2(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "password", thrift.STRING, 2)
-	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Password)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "username", thrift.STRING, 2)
+	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Username)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
@@ -2092,8 +2180,8 @@ func (p *Account) fastWriteField2(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) fastWriteField3(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "name", thrift.STRING, 3)
-	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Name)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "password", thrift.STRING, 3)
+	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Password)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
@@ -2101,8 +2189,8 @@ func (p *Account) fastWriteField3(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) fastWriteField4(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "avatar", thrift.STRING, 4)
-	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Avatar)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "name", thrift.STRING, 4)
+	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Name)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
@@ -2110,8 +2198,8 @@ func (p *Account) fastWriteField4(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) fastWriteField5(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "telephone", thrift.STRING, 5)
-	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Telephone)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "avatar", thrift.STRING, 5)
+	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Avatar)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
@@ -2119,8 +2207,8 @@ func (p *Account) fastWriteField5(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) fastWriteField6(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "email", thrift.STRING, 6)
-	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Email)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "telephone", thrift.STRING, 6)
+	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Telephone)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
@@ -2128,7 +2216,16 @@ func (p *Account) fastWriteField6(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) fastWriteField7(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "location", thrift.STRING, 7)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "email", thrift.STRING, 7)
+	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Email)
+
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
+func (p *Account) fastWriteField8(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "location", thrift.STRING, 8)
 	offset += bthrift.Binary.WriteStringNocopy(buf[offset:], binaryWriter, p.Location)
 
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
@@ -2137,8 +2234,8 @@ func (p *Account) fastWriteField7(buf []byte, binaryWriter bthrift.BinaryWriter)
 
 func (p *Account) field1Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("username", thrift.STRING, 1)
-	l += bthrift.Binary.StringLengthNocopy(p.Username)
+	l += bthrift.Binary.FieldBeginLength("id", thrift.I64, 1)
+	l += bthrift.Binary.I64Length(p.Id)
 
 	l += bthrift.Binary.FieldEndLength()
 	return l
@@ -2146,8 +2243,8 @@ func (p *Account) field1Length() int {
 
 func (p *Account) field2Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("password", thrift.STRING, 2)
-	l += bthrift.Binary.StringLengthNocopy(p.Password)
+	l += bthrift.Binary.FieldBeginLength("username", thrift.STRING, 2)
+	l += bthrift.Binary.StringLengthNocopy(p.Username)
 
 	l += bthrift.Binary.FieldEndLength()
 	return l
@@ -2155,8 +2252,8 @@ func (p *Account) field2Length() int {
 
 func (p *Account) field3Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("name", thrift.STRING, 3)
-	l += bthrift.Binary.StringLengthNocopy(p.Name)
+	l += bthrift.Binary.FieldBeginLength("password", thrift.STRING, 3)
+	l += bthrift.Binary.StringLengthNocopy(p.Password)
 
 	l += bthrift.Binary.FieldEndLength()
 	return l
@@ -2164,8 +2261,8 @@ func (p *Account) field3Length() int {
 
 func (p *Account) field4Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("avatar", thrift.STRING, 4)
-	l += bthrift.Binary.StringLengthNocopy(p.Avatar)
+	l += bthrift.Binary.FieldBeginLength("name", thrift.STRING, 4)
+	l += bthrift.Binary.StringLengthNocopy(p.Name)
 
 	l += bthrift.Binary.FieldEndLength()
 	return l
@@ -2173,8 +2270,8 @@ func (p *Account) field4Length() int {
 
 func (p *Account) field5Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("telephone", thrift.STRING, 5)
-	l += bthrift.Binary.StringLengthNocopy(p.Telephone)
+	l += bthrift.Binary.FieldBeginLength("avatar", thrift.STRING, 5)
+	l += bthrift.Binary.StringLengthNocopy(p.Avatar)
 
 	l += bthrift.Binary.FieldEndLength()
 	return l
@@ -2182,8 +2279,8 @@ func (p *Account) field5Length() int {
 
 func (p *Account) field6Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("email", thrift.STRING, 6)
-	l += bthrift.Binary.StringLengthNocopy(p.Email)
+	l += bthrift.Binary.FieldBeginLength("telephone", thrift.STRING, 6)
+	l += bthrift.Binary.StringLengthNocopy(p.Telephone)
 
 	l += bthrift.Binary.FieldEndLength()
 	return l
@@ -2191,7 +2288,16 @@ func (p *Account) field6Length() int {
 
 func (p *Account) field7Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("location", thrift.STRING, 7)
+	l += bthrift.Binary.FieldBeginLength("email", thrift.STRING, 7)
+	l += bthrift.Binary.StringLengthNocopy(p.Email)
+
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *Account) field8Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("location", thrift.STRING, 8)
 	l += bthrift.Binary.StringLengthNocopy(p.Location)
 
 	l += bthrift.Binary.FieldEndLength()

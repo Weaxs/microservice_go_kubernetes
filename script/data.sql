@@ -201,3 +201,6 @@ INSERT INTO stockpile
 VALUES (7, 30, 0, 7);
 INSERT INTO stockpile
 VALUES (8, 30, 0, 8);
+
+INSERT INTO wallet
+VALUES (1, 100, 1);

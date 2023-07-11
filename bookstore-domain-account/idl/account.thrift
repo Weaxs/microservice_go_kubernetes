@@ -1,13 +1,14 @@
 namespace go account
 
 struct Account {
-    1: string username
-    2: string password
-    3: string name
-    4: string avatar
-    5: string telephone
-    6: string email
-    7: string location
+    1: i64 id
+    2: string username
+    3: string password
+    4: string name
+    5: string avatar
+    6: string telephone
+    7: string email
+    8: string location
 }
 
 struct GetAccountRequest {

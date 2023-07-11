@@ -1,13 +1,14 @@
 package domain
 
 type Account struct {
-	Username  string `thrift:"username,1" frugal:"1,default,string" protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty" valid:"required"`
-	Password  string `thrift:"password,2" frugal:"2,default,string" protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Name      string `thrift:"name,3" frugal:"3,default,string" protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty" valid:"required"`
-	Avatar    string `thrift:"avatar,4" frugal:"4,default,string" protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Telephone string `thrift:"telephone,5" frugal:"5,default,string" protobuf:"bytes,5,opt,name=telephone,proto3" json:"telephone,omitempty" valid:"required,matches(1[0-9]{10})"`
-	Email     string `thrift:"email,6" frugal:"6,default,string" protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty" valid:"email"`
-	Location  string `thrift:"location,7" frugal:"7,default,string" protobuf:"bytes,7,opt,name=location,proto3" json:"location,omitempty"`
+	Id        int64  `thrift:"id,1" frugal:"1,default,i64" json:"id"`
+	Username  string `thrift:"username,2" frugal:"2,default,string" json:"username"`
+	Password  string `thrift:"password,3" frugal:"3,default,string" json:"password"`
+	Name      string `thrift:"name,4" frugal:"4,default,string" json:"name"`
+	Avatar    string `thrift:"avatar,5" frugal:"5,default,string" json:"avatar"`
+	Telephone string `thrift:"telephone,6" frugal:"6,default,string" json:"telephone"`
+	Email     string `thrift:"email,7" frugal:"7,default,string" json:"email"`
+	Location  string `thrift:"location,8" frugal:"8,default,string" json:"location"`
 }
 
 type GetAccountRequest struct {

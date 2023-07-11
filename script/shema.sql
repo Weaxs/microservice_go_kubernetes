@@ -1,3 +1,4 @@
+-- bookstore --
 CREATE DATABASE IF NOT EXISTS bookstore;
 
 ALTER DATABASE bookstore
@@ -6,7 +7,7 @@ ALTER DATABASE bookstore
 
 GRANT ALL PRIVILEGES ON bookstore.* TO 'bookstore@%' IDENTIFIED BY 'bookstore';
 
-
+-- account --
 DROP TABLE IF EXISTS account;
 
 CREATE TABLE IF NOT EXISTS account
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS account
     INDEX (username)
 ) engine = InnoDB;
 
+-- warehouse --
 DROP TABLE IF EXISTS specification;
 DROP TABLE IF EXISTS advertisement;
 DROP TABLE IF EXISTS stockpile;
@@ -63,4 +65,26 @@ CREATE TABLE IF NOT EXISTS advertisement
     image      VARCHAR(100),
     product_id INTEGER UNSIGNED,
     FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
+) engine = InnoDB;
+
+-- payment --
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS wallet;
+
+CREATE TABLE IF NOT EXISTS wallet
+(
+    id         INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    money      DECIMAL,
+    account_id INTEGER UNSIGNED
+) engine = InnoDB;
+
+CREATE TABLE IF NOT EXISTS payment
+(
+    id           INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    pay_id       VARCHAR(100),
+    create_time  DATETIME,
+    total_price  DECIMAL,
+    expires      INTEGER          NOT NULL,
+    payment_link VARCHAR(300),
+    pay_state    VARCHAR(20)
 ) engine = InnoDB;

@@ -15,9 +15,9 @@ func TestAccountClient(t *testing.T) {
 	if err != nil {
 		panic(any(err))
 	}
-	account, err := client.GetAccount(context.Background(), &domain.GetAccountRequest{Username: "zhangsan"})
+	account, err := client.GetAccount(context.Background(), &domain.GetAccountRequest{Username: "icyfenix"})
 	if err != nil {
 		panic(any(err))
 	}
-	assert.Equal(t, "zhangsan", account.Account.Username)
+	assert.Equal(t, "icyfenix", account.Account.Username)
 }

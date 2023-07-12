@@ -8,8 +8,14 @@ import (
 	"github.com/cloudwego/kitex/client/callopt"
 )
 
+type PaymentClient interface {
+	ExecuteSettlement(ctx context.Context, Req *domain.ExecuteSettlementRequest, callOptions ...callopt.Option) (r *domain.ExecuteSettlementResponse, err error)
+	UpdatePaymentState(ctx context.Context, Req *domain.UpdatePaymentStateRequest, callOptions ...callopt.Option) (r *domain.Empty, err error)
+	UpdatePaymentStateAlias(ctx context.Context, Req *domain.UpdatePaymentStateAlias, callOptions ...callopt.Option) (r *domain.Empty, err error)
+}
+
 // NewPaymentClient creates a client for the service defined in IDL.
-func NewPaymentClient(opts ...client.Option) (api.PaymentApi, error) {
+func NewPaymentClient(opts ...client.Option) (PaymentClient, error) {
 	var options []client.Option
 	options = append(options, client.WithDestService("PaymentApi"))
 

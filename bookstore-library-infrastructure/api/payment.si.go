@@ -11,7 +11,7 @@ var PaymentApiServiceInfo = newPaymentApiServiceInfo()
 
 func newPaymentApiServiceInfo() *kitex.ServiceInfo {
 	serviceName := "PaymentApi"
-	handlerType := (*domain.PaymentApi)(nil)
+	handlerType := (*PaymentApi)(nil)
 	methods := map[string]kitex.MethodInfo{
 		"executeSettlement":       kitex.NewMethodInfo(executeSettlementHandler, newExecuteSettlementArgs, newExecuteSettlementResult, false),
 		"updatePaymentState":      kitex.NewMethodInfo(updatePaymentStateHandler, newUpdatePaymentStateArgs, newUpdatePaymentStateResult, false),
@@ -39,7 +39,7 @@ func executeSettlementHandler(ctx context.Context, handler interface{}, arg, res
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(domain.PaymentApi).ExecuteSettlement(ctx, req)
+		resp, err := handler.(PaymentApi).ExecuteSettlement(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -47,7 +47,7 @@ func executeSettlementHandler(ctx context.Context, handler interface{}, arg, res
 			return err
 		}
 	case *domain.ExecuteSettlementArgs:
-		success, err := handler.(domain.PaymentApi).ExecuteSettlement(ctx, s.Req)
+		success, err := handler.(PaymentApi).ExecuteSettlement(ctx, s.Req)
 		if err != nil {
 			return err
 		}
@@ -65,7 +65,7 @@ func updatePaymentStateHandler(ctx context.Context, handler interface{}, arg, re
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(domain.PaymentApi).UpdatePaymentState(ctx, req)
+		resp, err := handler.(PaymentApi).UpdatePaymentState(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -73,7 +73,7 @@ func updatePaymentStateHandler(ctx context.Context, handler interface{}, arg, re
 			return err
 		}
 	case *domain.UpdatePaymentStateArgs:
-		success, err := handler.(domain.PaymentApi).UpdatePaymentState(ctx, s.Req)
+		success, err := handler.(PaymentApi).UpdatePaymentState(ctx, s.Req)
 		if err != nil {
 			return err
 		}
@@ -91,7 +91,7 @@ func updatePaymentStateAliasHandler(ctx context.Context, handler interface{}, ar
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(domain.PaymentApi).UpdatePaymentStateAlias(ctx, req)
+		resp, err := handler.(PaymentApi).UpdatePaymentStateAlias(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -99,7 +99,7 @@ func updatePaymentStateAliasHandler(ctx context.Context, handler interface{}, ar
 			return err
 		}
 	case *domain.UpdatePaymentStateAliasArgs:
-		success, err := handler.(domain.PaymentApi).UpdatePaymentStateAlias(ctx, s.Req)
+		success, err := handler.(PaymentApi).UpdatePaymentStateAlias(ctx, s.Req)
 		if err != nil {
 			return err
 		}

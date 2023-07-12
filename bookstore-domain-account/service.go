@@ -6,6 +6,7 @@ import (
 	"github.com/Weaxs/microservice_go_kubernetes/bookstore-library-infrastructure/domain"
 	"github.com/asaskevich/govalidator"
 	"github.com/cloudwego/kitex/pkg/klog"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func getAccount(ctx context.Context, username string) (account *domain.Account, err error) {
@@ -45,6 +46,12 @@ func createAccount(ctx context.Context, account *domain.Account) (err error) {
 		klog.CtxDebugf(ctx, "用户名称、邮箱、手机号码均不允许与现存用户重复")
 		return errors.New("用户名称、邮箱、手机号码均不允许与现存用户重复")
 	}
+	// Bcrypt加密
+	password, err := bcrypt.GenerateFromPassword([]byte(account.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+	account.Password = string(password)
 
 	po := &AccountPo{
 		Username:  account.Username,

@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/Weaxs/microservice_go_kubernetes/bookstore-library-infrastructure v0.0.0-20230712143400-35e98dd88d5f
-	github.com/asaskevich/govalidator v11.0.1+incompatible
+	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/cloudwego/kitex v0.6.1
 	github.com/kitex-contrib/obs-opentelemetry/logging/logrus v0.0.0-20230512024524-5f5a227105f7
 	github.com/stretchr/testify v1.8.4

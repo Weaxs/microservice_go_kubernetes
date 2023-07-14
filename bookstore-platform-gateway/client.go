@@ -12,8 +12,9 @@ var (
 )
 
 func NewWarehouseClient() (*client.WarehouseClient, error) {
+	hostports := Config.GetStringSlice(WarehouseClientHostPost)
 	c, err := client.NewWarehouseClient(
-		kitex.WithHostPorts("[::1]:8811"), kitex.WithMuxConnection(1))
+		kitex.WithHostPorts(hostports...), kitex.WithMuxConnection(Config.GetInt(WarehouseClientConnNum)))
 	if err != nil {
 		return nil, err
 	}
@@ -21,8 +22,9 @@ func NewWarehouseClient() (*client.WarehouseClient, error) {
 }
 
 func NewAccountClient() (*client.AccountClient, error) {
+	hostports := Config.GetStringSlice(AccountClientHostPost)
 	c, err := client.NewAccountClient(
-		kitex.WithHostPorts("[::1]:8811"), kitex.WithMuxConnection(1))
+		kitex.WithHostPorts(hostports...), kitex.WithMuxConnection(Config.GetInt(AccountClientConnNum)))
 	if err != nil {
 		return nil, err
 	}
@@ -30,8 +32,9 @@ func NewAccountClient() (*client.AccountClient, error) {
 }
 
 func NewPaymentClient() (*client.PaymentClient, error) {
+	hostports := Config.GetStringSlice(PaymentClientHostPost)
 	c, err := client.NewPaymentClient(
-		kitex.WithHostPorts("[::1]:8811"), kitex.WithMuxConnection(1))
+		kitex.WithHostPorts(hostports...), kitex.WithMuxConnection(Config.GetInt(PaymentClientConnNum)))
 	if err != nil {
 		return nil, err
 	}

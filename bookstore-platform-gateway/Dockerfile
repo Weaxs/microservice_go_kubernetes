@@ -8,6 +8,7 @@ ENV GO111MODULE=on \
     PORT=8810
 
 COPY *.go ./
+COPY *.toml ./
 COPY go.mod go.sum ./
 RUN go mod tidy
 RUN CGO_ENABLED=0 go build -o bookstore-platform-gateway *.go

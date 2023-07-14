@@ -6,7 +6,10 @@ import (
 )
 
 var (
-	db, _ = gorm.Open(mysql.Open("root:12345678@(127.0.0.1:3306)/bookstore"), &gorm.Config{})
+	dsn = Config.GetString(DbUserKey) + ":" + Config.GetString(DbPasswordKey) + "@(" +
+		Config.GetString(DbHostKey) + ":" + Config.GetString(DbPortKey) + ")/" +
+		Config.GetString(DbDatabaseKey) + "?parseTime=true"
+	db, _ = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 )
 
 type AccountPo struct {

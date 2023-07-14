@@ -12,8 +12,9 @@ type WarehouseClient struct {
 }
 
 func NewWarehouseClient() (*WarehouseClient, error) {
+	hostports := Config.GetStringSlice(AccountClientHostPost)
 	c, err := client.NewWarehouseClient(
-		kitex.WithHostPorts("[::1]:8811"), kitex.WithMuxConnection(1))
+		kitex.WithHostPorts(hostports...), kitex.WithMuxConnection(Config.GetInt(AccountClientConnNum)))
 	if err != nil {
 		return nil, err
 	}

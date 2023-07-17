@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: payment
+  namespace: bookstore-microservices
+  labels:
+    app: payment
+spec:
+  type: ClusterIP
+  selector:
+    app: payment
+  ports:
+    - port: 8812
+      targetPort: server

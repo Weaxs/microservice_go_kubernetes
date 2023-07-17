@@ -1,0 +1,17 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: payment
+  namespace: bookstore-microservices
+data:
+  config.toml: |-
+    [db]
+    host = "host.docker.internal"
+    port = 3306
+    user = "root"
+    password = ""
+    database = "bookstore"
+    
+    [account.client]
+    connnum = 1
+    hostport = ["host.docker.internal:8810"]

@@ -5,7 +5,7 @@ WORKDIR /app
 
 ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct \
-    PORT=8810
+    PORT=8811
 
 COPY *.go ./
 COPY *.toml ./

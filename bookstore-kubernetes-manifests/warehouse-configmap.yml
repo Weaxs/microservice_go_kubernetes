@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: warehouse
+  namespace: bookstore-microservices
+data:
+  config.toml: |-
+    [db]
+    host = "host.docker.internal"
+    port = 3306
+    user = "root"
+    password = ""
+    database = "bookstore"

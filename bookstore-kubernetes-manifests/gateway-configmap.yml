@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: gateway
+  namespace: bookstore-microservices
+data:
+  config.toml: |-
+    [account.client]
+    connnum = 1
+    hostport = ["host.docker.internal:8810"]
+    
+    [payment.client]
+    connnum = 1
+    hostport = ["host.docker.internal:8812"]
+    
+    [warehouse.client]
+    connnum = 1
+    hostport = ["host.docker.internal:8811"]    

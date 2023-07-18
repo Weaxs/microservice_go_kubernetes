@@ -78,7 +78,7 @@ func registerWarehouseRoute(h *route.RouterGroup) {
 		warehouse.updateStockpile(c, ctx)
 	})
 	h.GET("/advertisements", func(c context.Context, ctx *app.RequestContext) {
-
+		warehouse.getAllAdvertisements(c, ctx)
 	})
 
 }

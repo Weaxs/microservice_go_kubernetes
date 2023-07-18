@@ -8,7 +8,6 @@ ENV GO111MODULE=on \
     PORT=8888
 
 COPY *.go ./
-COPY *.toml ./
 COPY go.mod go.sum ./
 RUN go mod tidy
 RUN CGO_ENABLED=0 go build -o bookstore-platform-gateway *.go
@@ -21,6 +20,7 @@ RUN apk --no-cache add ca-certificates
 
 RUN mkdir /app
 WORKDIR /app
+COPY conf/*.toml conf/
 COPY --from=builder /app/bookstore-platform-gateway .
 
 EXPOSE $PORT

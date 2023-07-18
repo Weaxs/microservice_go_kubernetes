@@ -11,4 +11,4 @@ spec:
     app: payment
   ports:
     - port: 8812
-      targetPort: server
+      targetPort: rpc-server

@@ -15,9 +15,21 @@ spec:
       labels:
         app: warehouse
     spec:
+      serviceAccountName: book-admin
       containers:
         - name: warehouse
           image: icyfenix/bookstore-domain-warehouse
           ports:
-            - containerPort: 8811
-              name: server
+            - containerPort: 8888
+              name: rpc-server
+          env:
+            - name: CONFIG_PATH
+              value: /app/conf/config.toml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/conf
+      # 映射configmap
+      volumes:
+        - name: config-volume
+          configMap:
+            name: warehouse

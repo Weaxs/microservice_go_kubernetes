@@ -11,4 +11,4 @@ spec:
     app: warehouse
   ports:
     - port: 8811
-      targetPort: http-server
+      targetPort: rpc-server

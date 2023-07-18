@@ -21,5 +21,7 @@ payment/warehouse 模块提供了protobuf协议的RPC接口
 
 [viper接入configmap](https://medium.com/@xcoulon/kubernetes-configmap-hot-reload-in-action-with-viper-d413128a1c9a)
 
+[Deployment添加ConfigMap和Secret映射](https://medium.com/@xcoulon/managing-pod-configuration-using-configmaps-and-secrets-in-kubernetes-93a2de9449be)
+
 [golang微服务示例](https://github.com/EwanValentine/shippy)
 

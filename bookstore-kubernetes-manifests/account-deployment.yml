@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bookstore-microservices-domain-account
+  name: bookstore-domain-account
   namespace: bookstore-microservices
   labels:
     app: account
@@ -20,4 +20,16 @@ spec:
         - name: account
           image: icyfenix/bookstore-domain-account
           ports:
-            - containerPort: 8810
+            - containerPort: 8888
+              name: rpc-server
+          env:
+            - name: CONFIG_PATH
+              value: /app/conf/config.toml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/conf
+      # 映射configmap
+      volumes:
+        - name: config-volume
+          configMap:
+            name: account

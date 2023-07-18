@@ -6,19 +6,18 @@ import (
 	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
 	"log"
-	"net"
 )
 
 func main() {
 	initLog()
-	addr, err := net.ResolveTCPAddr("tcp", ":8811")
-	if err != nil {
-		panic(any(err))
-	}
+	//addr, err := net.ResolveTCPAddr("tcp", ":8811")
+	//if err != nil {
+	//	panic(any(err))
+	//}
 
 	var options []server.Option
 	// service address
-	options = append(options, server.WithServiceAddr(addr))
+	//options = append(options, server.WithServiceAddr(addr))
 	// Multiplexing
 	options = append(options, server.WithMuxTransport())
 

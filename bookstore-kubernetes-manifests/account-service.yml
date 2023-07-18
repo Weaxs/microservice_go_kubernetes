@@ -11,4 +11,4 @@ spec:
     app: account
   ports:
     - port: 8810
-      targetPort: server
+      targetPort: rpc-server

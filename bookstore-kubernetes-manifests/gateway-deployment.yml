@@ -22,3 +22,14 @@ spec:
           ports:
             - name: http-server
               containerPort: 8888
+          env:
+            - name: CONFIG_PATH
+              value: /app/conf/config.toml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/conf
+      # 映射configmap
+      volumes:
+        - name: config-volume
+          configMap:
+            name: gateway

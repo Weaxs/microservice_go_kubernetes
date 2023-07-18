@@ -20,5 +20,16 @@ spec:
         - name: payment
           image: icyfenix/bookstore-domain-payment
           ports:
-            - name: server
-              containerPort: 8812
+            - name: rpc-server
+              containerPort: 8888
+          env:
+            - name: CONFIG_PATH
+              value: /app/conf/config.toml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/conf
+      # 映射configmap
+      volumes:
+        - name: config-volume
+          configMap:
+            name: payment

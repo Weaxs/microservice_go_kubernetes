@@ -74,7 +74,7 @@ func registerWarehouseRoute(h *route.RouterGroup) {
 	h.GET("/products/stockpile/:productId", func(c context.Context, ctx *app.RequestContext) {
 		warehouse.getStockpileByProductId(c, ctx)
 	})
-	h.PATCH("/products/stockpile/:productId?amount=:amount", func(c context.Context, ctx *app.RequestContext) {
+	h.PATCH("/products/stockpile/:productId", func(c context.Context, ctx *app.RequestContext) {
 		warehouse.updateStockpile(c, ctx)
 	})
 	h.GET("/advertisements", func(c context.Context, ctx *app.RequestContext) {

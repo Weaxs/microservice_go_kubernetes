@@ -192,7 +192,7 @@ spec:
           env:
             - name: CONFIG_PATH
               value: /app/conf/config.toml
-					# vloumes 映射到 container 中的配置文件目录
+          # volumes 映射到 container 中的配置文件目录
           volumeMounts:
             - name: config-volume
               mountPath: /app/conf

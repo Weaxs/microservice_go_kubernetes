@@ -7,12 +7,12 @@ data:
   config.toml: |-
     [account.client]
     connnum = 1
-    hostport = ["host.docker.internal:8810"]
+    hostport = ["account:8810"]
     
     [payment.client]
     connnum = 1
-    hostport = ["host.docker.internal:8812"]
+    hostport = ["payment:8812"]
     
     [warehouse.client]
     connnum = 1
-    hostport = ["host.docker.internal:8811"]    
+    hostport = ["warehouse:8811"]    

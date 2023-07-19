@@ -13,4 +13,4 @@ spec:
     - port: 8888
       targetPort: http-server
       # 30000-32767
-      nodePort: 32080
+      nodePort: 30080
